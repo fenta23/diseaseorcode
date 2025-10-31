@@ -21,6 +21,7 @@
                 "input": "public"
               }
             ],
+            "outputPath": "dist/diseaseOrCode",
             "styles": [
               "src/custom-theme.scss",
               "src/styles.css"
