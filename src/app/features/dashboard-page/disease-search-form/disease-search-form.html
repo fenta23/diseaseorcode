@@ -30,6 +30,8 @@
             <mat-option [value]="option">
               <span class="disease-name" [innerHTML]="option.name | highlight : searchTerm()"></span>
               <span class="disease-code" [innerHTML]="option.code | highlight : searchTerm()"></span>
+              <span class="disease-abbr" >{{option.abbr}}</span>
+
             </mat-option>
           }
         </mat-autocomplete>

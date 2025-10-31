@@ -6,6 +6,7 @@ import { catchError, map, of, shareReplay } from 'rxjs';
 export interface Disease {
   name: string;
   code: string;
+  abbr: string;
 }
 
 @Injectable({
