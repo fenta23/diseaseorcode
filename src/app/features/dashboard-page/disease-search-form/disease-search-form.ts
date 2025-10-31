@@ -35,7 +35,10 @@ export class DiseaseSearchForm {
     const value: string | Disease = this.searchTerm();
     const term = typeof value === 'string' ? value.trim() : '';
 
-    if (!term) return [];
+
+    if (!term || term.length< 2) {
+      return [];
+    }
     const regex = new RegExp(term, 'gi');
     return this.searchService.allDiseases().filter(disease =>
       disease.name.match(regex) || disease.code.match(regex)
