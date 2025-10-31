@@ -1,0 +1,43 @@
+<mat-card appearance="outlined">
+  @let search = searchService;
+  <mat-card-header>
+    <mat-card-title>Filter for a disease or code</mat-card-title>
+    <mat-card-subtitle>
+      @if (search.isLoading()) {
+        Loading diseases...
+      } @else if (search.errorMessage()) {
+        {{ search.errorMessage() }}
+      } @else {
+        Filter as you type ({{ search.allDiseases().length }} diseases loaded)
+      }
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="search-form">
+      <mat-form-field class="search-field" appearance="outline">
+        <mat-label>Disease or Code</mat-label>
+        <input type="text"
+               placeholder="Filter for a disease or code"
+               aria-label="Filter for a disease or code"
+               matInput
+               [formControl]="myControl"
+               [matAutocomplete]="auto">
+        <mat-autocomplete
+          autoActiveFirstOption
+          #auto="matAutocomplete"
+          [displayWith]="displayFn">
+          @for (option of filteredOptions(); track option.code) {
+            <mat-option [value]="option">
+              <span class="disease-name" [innerHTML]="option.name | highlight : searchTerm()"></span>
+              <span class="disease-code" [innerHTML]="option.code | highlight : searchTerm()"></span>
+            </mat-option>
+          } @empty {
+            @if (searchTerm() && !search.isLoading()) {
+              <mat-option disabled>No matches found</mat-option>
+            }
+          }
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,21 @@
+mat-card {
+  max-width: 600px;
+}
+
+.disease-name {
+  font-weight: 500;
+}
+
+
+.search-form {
+  margin-top: 20px;
+
+  .search-field {
+    width: 360px;
+  }
+}
+
+.disease-code {
+  color: rgba(0, 0, 0, 0.54);
+  margin-left: 8px;
+}

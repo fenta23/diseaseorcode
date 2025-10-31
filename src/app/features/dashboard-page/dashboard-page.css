@@ -1,0 +1,5 @@
+app-disease-search-form {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
