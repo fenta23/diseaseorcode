@@ -20,7 +20,7 @@
                placeholder="Filter for a disease or code"
                aria-label="Filter for a disease or code"
                matInput
-               [formControl]="myControl"
+               [formControl]="searchControl"
                [matAutocomplete]="auto">
         <mat-autocomplete
           autoActiveFirstOption
@@ -31,10 +31,6 @@
               <span class="disease-name" [innerHTML]="option.name | highlight : searchTerm()"></span>
               <span class="disease-code" [innerHTML]="option.code | highlight : searchTerm()"></span>
             </mat-option>
-          } @empty {
-            @if (searchTerm() && !search.isLoading()) {
-              <mat-option disabled>No matches found</mat-option>
-            }
           }
         </mat-autocomplete>
       </mat-form-field>

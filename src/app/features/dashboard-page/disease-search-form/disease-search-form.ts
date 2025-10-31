@@ -1,4 +1,4 @@
-import { Component, computed, inject, Signal, signal } from '@angular/core';
+import { Component, computed, inject, Signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -23,33 +23,30 @@ import { HighlightPipe } from '../pipes/highlight-pipe';
 })
 export class DiseaseSearchForm {
 
-  public searchService = inject(Search);
+  public readonly searchService = inject(Search);
+  public readonly searchControl = new FormControl<string>('', {nonNullable: true});
 
-  public myControl: FormControl<string> = new FormControl<string>('', {nonNullable: true});
-
-  public searchTerm: Signal<string> = toSignal(this.myControl.valueChanges, {initialValue: ''});
+  public searchTerm: Signal<string> = toSignal(
+    this.searchControl.valueChanges,
+    {initialValue: ''}
+  );
 
   public filteredOptions: Signal<Disease[]> = computed(() => {
-    const term = this.searchTerm()?.trim() || '';
-    const diseases = this.searchService.allDiseases();
+    const value: string | Disease = this.searchTerm();
+    const term = typeof value === 'string' ? value.trim() : '';
 
-    if (!term) {
-      return [];
-    }
-
+    if (!term) return [];
     const regex = new RegExp(term, 'gi');
-    return diseases.filter(disease =>
+    return this.searchService.allDiseases().filter(disease =>
       disease.name.match(regex) || disease.code.match(regex)
     );
   });
 
 
-  public ngOnInit(): void {
-    this.searchService.loadDiseaseData();
-  }
-
-
-  public displayFn(disease: Disease): string {
-    return disease ? `${disease.name} (${disease.code})` : '';
+  public displayFn(disease: string | Disease | null): string {
+    if (!disease || typeof disease === 'string') {
+      return typeof disease === 'string' ? disease : '';
+    }
+    return `${disease.name} (${disease.code})`;
   }
 }
