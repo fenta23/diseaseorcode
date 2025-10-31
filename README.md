@@ -1,59 +1,79 @@
+Hier ist eine aktualisierte README mit allen wichtigen Infos zu deinem Projekt und Deployment:
+
+```markdown
 # DiseaseOrCode
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.6.
+Eine Angular-Anwendung, die auf GitHub Pages gehostet wird.
 
-## Development server
+🌐 **Live Demo**: [https://fenta23.github.io/diseaseorcode/](https://fenta23.github.io/diseaseorcode/)
 
-To start a local development server, run:
+## Entwicklung
+
+### Voraussetzungen
+
+- Node.js (aktuelle LTS-Version)
+- Angular CLI (`npm install -g @angular/cli`)
+
+### Lokaler Development Server
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Die App läuft dann auf `http://localhost:4200/`.
 
-## Code scaffolding
+## Deployment auf GitHub Pages
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Automatisches Deployment
+
+Bei jedem Push auf `main` wird die App automatisch über GitHub Actions deployed.
+
+### Manuelles Deployment
 
 ```bash
-ng generate component component-name
+# 1. Build erstellen
+ng build --base-href="/diseaseorcode/"
+
+# 2. Auf GitHub Pages deployen
+npx angular-cli-ghpages --dir=dist/diseaseOrCode/browser --no-silent
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+**Wichtig**:
+- Der `--base-href` muss `/diseaseorcode/` sein (Repository-Name)
+- Der Build liegt in `dist/diseaseOrCode/browser/` (nicht `dist/diseaseOrCode/`)
+- Nach dem Deployment 2-3 Minuten warten, bis die Änderungen live sind
+
+### Deployment überprüfen
 
 ```bash
-ng generate --help
+# gh-pages Branch anschauen
+git checkout gh-pages
+ls -la  # Sollte nur index.html, *.js, *.css enthalten
+
+# Zurück zu main
+git checkout main
 ```
-
-## Building
-
-To build the project run:
+## Tests
 
 ```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
+# Unit Tests
 ng test
-```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
+# End-to-End Tests
 ng e2e
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Projekt-Struktur
 
-## Additional Resources
+```
+diseaseOrCode/
+├── src/                    # Source-Code
+├── dist/                   # Build-Output (nicht committen)
+└── angular.json            # Angular-Konfiguration
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Weitere Infos
+
+- Angular CLI: [https://angular.dev/tools/cli](https://angular.dev/tools/cli)
+- GitHub Pages: [https://docs.github.com/pages](https://docs.github.com/pages)
+```
