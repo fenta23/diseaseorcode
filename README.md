@@ -1,6 +1,5 @@
 Hier ist eine aktualisierte README mit allen wichtigen Infos zu deinem Projekt und Deployment:
 
-```markdown
 # DiseaseOrCode
 
 Eine Angular-Anwendung, die auf GitHub Pages gehostet wird.
@@ -76,4 +75,4 @@ diseaseOrCode/
 
 - Angular CLI: [https://angular.dev/tools/cli](https://angular.dev/tools/cli)
 - GitHub Pages: [https://docs.github.com/pages](https://docs.github.com/pages)
-```
+
