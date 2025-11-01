@@ -13,8 +13,17 @@ export class HighlightPipe implements PipeTransform {
       return text;
     }
 
-    const regex = new RegExp(`(${search})`, 'gi');
+    const trimmedSearch = search.trim();
+    if (!trimmedSearch) {
+      return text;
+    }
+
+    const regex = new RegExp(`(${this.escapeRegex(trimmedSearch)})`, 'gi');
     const highlighted = text.replace(regex, '<mark class="hl">$1</mark>');
     return this.sanitizer.bypassSecurityTrustHtml(highlighted);
+  }
+
+  private escapeRegex(str: string): string {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 }
