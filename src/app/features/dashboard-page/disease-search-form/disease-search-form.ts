@@ -36,7 +36,7 @@ export class DiseaseSearchForm {
     const term = typeof value === 'string' ? value.trim() : '';
 
 
-    if (!term || term.length< 2) {
+    if (!term || term.length < 2) {
       return [];
     }
     const regex = new RegExp(term, 'gi');

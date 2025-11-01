@@ -30,9 +30,13 @@
             <mat-option [value]="option">
               <span class="disease-name" [innerHTML]="option.name | highlight : searchTerm()"></span>
               <span class="disease-code" [innerHTML]="option.code | highlight : searchTerm()"></span>
-              <span class="disease-abbr" >{{option.abbr}}</span>
+              <span class="disease-abbr">{{ option.abbr }}</span>
 
             </mat-option>
+          } @empty {
+            @if (searchTerm().length>=2 && !search.isLoading()) {
+              <mat-option disabled>No matches found</mat-option>
+            }
           }
         </mat-autocomplete>
       </mat-form-field>
