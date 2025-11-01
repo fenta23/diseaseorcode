@@ -56,7 +56,7 @@ git checkout main
 
 ```bash
 # Unit Tests
-ng test
+npm run test
 
 # End-to-End Tests
 ng e2e
