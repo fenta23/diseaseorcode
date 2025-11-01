@@ -16,10 +16,9 @@ export class Search {
   private readonly http = inject(HttpClient);
 
   private readonly url = 'https://raw.githubusercontent.com/NCI-CBIIT/FHH/master/data/diseases.json';
-  private readonly corsProxy = 'https://corsproxy.io/?';
 
   private readonly diseaseData$ = this.http.get<Record<string, Disease[]>>(
-    this.corsProxy + encodeURIComponent(this.url)
+    this.url
   ).pipe(
     map(data => {
       const diseases: Disease[] = [];
@@ -34,7 +33,7 @@ export class Search {
     })
   );
 
-  public allDiseases = toSignal(this.diseaseData$, { initialValue: [] });
+  public allDiseases = toSignal(this.diseaseData$, {initialValue: []});
   public isLoading = computed(() => this.allDiseases() === undefined);
   public errorMessage = computed(() =>
     this.allDiseases().length === 0 ? 'Error loading data. Please refresh.' : null
