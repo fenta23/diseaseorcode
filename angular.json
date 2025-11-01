@@ -23,8 +23,7 @@
             ],
             "outputPath": "dist/diseaseOrCode",
             "styles": [
-              "src/custom-theme.scss",
-              "src/styles.css"
+              "src/custom-theme.scss"
             ]
           },
           "configurations": {
